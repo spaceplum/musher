@@ -1,0 +1,75 @@
+﻿body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+h1:first-letter,
+h2:first-letter {
+    text-transform: uppercase;
+}
+
+.body-content {
+    padding-bottom: 3em;
+}
+
+.searchresult:not(.list-inline) {
+    padding-left: 1.5em;
+}
+
+.searchresult > li {
+    margin-bottom: 10px;
+}
+
+.searchresult .searchresult__item {
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.searchresult .list-inline > li {
+    padding-left: 0;
+}
+
+.artist__image {
+    width: 100%;
+    height: auto;
+}
+
+input[type=range] {
+    display: inline-block;
+    width: 100%;
+}
+
+.input-output {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-output__input {
+    flex-grow: 1;
+}
+
+.input-output__output {
+    flex-basis: 6em;
+    margin: 0 .5em;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+.input-output__reset {
+    flex-basis: 1em;
+    cursor: pointer;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+@media screen and (min-device-width: 768px) {
+    div[class^="col"] > *:first-child,
+    .well > *:first-child {
+        margin-top: 0;
+    }
+}

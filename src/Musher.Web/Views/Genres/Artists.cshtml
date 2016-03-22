@@ -1,0 +1,18 @@
+﻿@using Musher.Web.Models
+@model GenresArtistsViewModel
+
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Artists associated with the genre <em>@Model.Genre</em></h1>
+        <div class="well">
+            @if (Model.Artists.Any())
+            {
+                @Html.Partial("_ArtistList", new ArtistsListViewModel { Artists = Model.Artists })
+            }
+            else
+            {
+                <p>No artists found.</p>
+            }
+        </div>
+    </div>
+</div>

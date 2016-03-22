@@ -1,0 +1,42 @@
+﻿@model Musher.Web.Models.RecommendationViewModel
+
+@{
+    const int MinYear = 1600;
+    int MaxYear = (int)(Math.Ceiling(DateTime.Now.Year / 10.0d) * 10);
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <div class="well">
+        @Html.ValidationMessage("Query", new { @class = "alert alert-danger", role = "alert" }, "p")
+        <div class="form-group">
+            @Html.LabelFor(m => m.MoodQuery)
+            @Html.ListBoxFor(m => m.MoodQuery, new SelectList(Model.Moods, "Name", "Name"), new { title = "Select one or more moods", @class = "form-control select2", multiple = "multiple" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StyleQuery)
+            @Html.ListBoxFor(m => m.StyleQuery, new SelectList(Model.Styles, "Name", "Name"), new { title = "Select one or more styles", @class = "form-control select2", multiple = "multiple" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.GenreQuery)
+            @Html.ListBoxFor(m => m.GenreQuery, new SelectList(Model.Genres, "Name", "Name"), new { title = "Select one or more genres", @class = "form-control select2", multiple = "multiple" })
+        </div>
+        <div class="form-group form-inline">
+            @Html.LabelFor(m => m.StartYearQuery)
+            <div class="input-output">
+                <input class="input-output__input" id="startyear-range" type="range" min="@MinYear" max="@MaxYear" step="10" />
+                @Html.TextBoxFor(m => m.StartYearQuery, new { @class = "input-output__output form-control", @type = "number", @readonly = "readonly", data_output = "" })
+                <span class="input-output__reset glyphicon glyphicon-remove-circle"></span>
+            </div>
+        </div>
+        <div class="form-group form-inline">
+            @Html.LabelFor(m => m.EndYearQuery)
+            <div class="input-output">
+                <input class="input-output__input" id="endyear-range" type="range" min="@MinYear" max="@MaxYear" step="10" />
+                @Html.TextBoxFor(m => m.EndYearQuery, new { @class = "input-output__output form-control", @type = "number", @readonly = "readonly", data_output = "" })
+                <span class="input-output__reset glyphicon glyphicon-remove-circle"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}

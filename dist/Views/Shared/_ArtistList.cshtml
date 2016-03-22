@@ -1,0 +1,18 @@
+﻿@model Musher.Web.Models.ArtistsListViewModel
+
+<ul class="searchresult">
+    @foreach (var artist in Model.Artists)
+    {
+        <li>
+            <div class="searchresult__item">@Html.ActionLink(artist.Name, "Artist", "Artists", new { id = artist.Name }, null)</div>
+            <ul class="list-unstyled list-inline">
+                <li>
+                    @Html.ActionLink("Similar artists", "Similar", "Artists", new { id = artist.Name }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Genres", "Genres", "Artists", new { id = artist.Name }, null)
+                </li>
+            </ul>
+        </li>
+    }
+</ul>

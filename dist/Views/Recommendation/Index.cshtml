@@ -1,0 +1,22 @@
+﻿@using Musher.Web.Models
+@model RecommendationViewModel
+
+<h1>Get music recommendations</h1>
+<div class="row">
+    <div class="col-sm-4">
+        @Html.Partial("_SearchForm")
+    </div>
+    @if (Model.IsSearch)
+    {
+        @Html.Partial("_SearchResult")
+    }
+    else
+    {
+        <div class="col-sm-4">
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Find recommended artists and songs by selecting genres, moods, styles and time period.
+            </div>
+        </div>
+    }
+</div>

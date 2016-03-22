@@ -1,0 +1,22 @@
+﻿@model Musher.Web.Models.ArtistsGenresViewModel
+
+<h1>Genres associated with @Html.ActionLink(Model.Artist, "Artist", "Artists", new { id = Model.Artist }, null)</h1>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="well">
+            @if (Model.Genres.Any())
+            {
+                <ul class="searchresult">
+                    @foreach (var genre in Model.Genres)
+                    {
+                        <li>@Html.ActionLink(genre.Name, "Genre", "Genres", new { id = genre.Name }, null)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No genres found.</p>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model Musher.Web.Models.ArtistsArtistViewModel
+
+<h1>@Model.Artist.Name</h1>
+<div class="row">
+    <div class="col-sm-4">
+        <p>@Model.ArtistBiography()</p>
+    </div>
+    <div class="col-sm-4">
+        @Html.ActionLink("Similar artists to " + Model.Artist.Name, "Similar", "Artists", new { id = Model.Artist.Name }, new { @class = "btn btn-primary btn-block" })
+        @if (Model.Artist.Genres.Any())
+        {
+            <h2>Genres</h2>
+            <div class="well">
+                <ul class="searchresult">
+                    @foreach (var genre in Model.Artist.Genres)
+                    {
+                        <li>@Html.ActionLink(genre.Name, "Genre", "Genres", new {id = genre.Name}, null)</li>
+                    }
+                </ul>
+            </div>
+        }
+        @if (Model.Artist.Terms.Any())
+        {
+            <h2>Styles & Moods</h2>
+            <div class="well">
+                <ul class="searchresult list-inline">
+                    @foreach (var term in Model.Artist.Terms)
+                    {
+                        <li>@term.Name</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            @foreach (var image in Model.Images())
+            {
+                <div class="col-xs-12">
+                    <span class="thumbnail"><img class="artist__image" src="@image.Url" alt="" /></span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

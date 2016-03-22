@@ -1,0 +1,18 @@
+﻿@using Musher.Web.Models
+@model SimilarArtistsViewModel
+
+<h1>Artists similar to @Html.ActionLink(Model.Artist, "Artist", "Artists", new { id = Model.Artist }, null)</h1>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="well">
+            @if (Model.SimilarArtists.Any())
+            {
+                @Html.Partial("_ArtistList", new ArtistsListViewModel { Artists = Model.SimilarArtists })
+            }
+            else
+            {
+                <p>No artists found.</p>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@using Musher.Web.Models
+@model GenresGenreViewModel
+
+<h1>@Model.Genre.Name</h1>
+<div class="row">
+    <div class="col-sm-4">
+        @if (!string.IsNullOrEmpty(Model.Genre.Description))
+        {
+            <p>@Model.Genre.Description</p>
+        }
+        @if (Model.SimilarGenres.Any())
+        {
+            <h2>Similar genres</h2>
+            <div class="well">
+                <ul class="searchresult">
+                    @foreach (var genre in Model.SimilarGenres)
+                    {
+                        <li>@Html.ActionLink(genre.Name, "Genre", "Genres", new { id = genre.Name }, null)</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="col-sm-4">
+        <h2>Artists</h2>
+        <div class="well">
+            @if (Model.Artists.Any())
+            {
+                @Html.Partial("_ArtistList", new ArtistsListViewModel { Artists = Model.Artists })
+            }
+            else
+            {
+                <p>No artists found.</p>
+            }
+        </div>
+    </div>
+</div>

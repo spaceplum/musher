@@ -1,0 +1,47 @@
+﻿@using Musher.Web.Models
+@model ArtistsSearchViewModel
+
+<h1>Find artists</h1>
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        @using (Html.BeginForm("Search", "Artists", FormMethod.Get))
+        {
+            <div class="well">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, null, new { required = "required", title = "Enter the name of an artist", @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Genre)
+                    @Html.DropDownListFor(m => m.Genre, new SelectList(Model.Genres, "Name", "Name"), string.Empty, new { title = "Select a genre", @class = "form-control select2" })
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        }
+    </div>
+    @if (Model.IsSearch)
+    {
+        <div class="col-sm-6 col-md-4">
+            <h2>Search result</h2>
+            <div class="well">
+                @if (Model.Artists.Any())
+                {
+                    @Html.Partial("_ArtistList", new ArtistsListViewModel {Artists = Model.Artists})
+                }
+                else
+                {
+                    <p>No artists found.</p>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-4">
+            <div class="alert alert-info" role="alert">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Find artists by name and genre.
+            </div>
+        </div>
+    }
+</div>

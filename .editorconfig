@@ -1,0 +1,16 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# File character encoding utf-8
+# Indentation style space
+# File should end with a newline
+# Whitespace not allowed at the end of lines
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
