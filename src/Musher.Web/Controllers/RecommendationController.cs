@@ -6,10 +6,13 @@ using Musher.Web.Models;
 
 namespace Musher.Web.Controllers
 {
-    public class RecommendationController : ServiceController
+    public class RecommendationController : Controller
     {
-        public RecommendationController(IService service) : base(service)
+        private readonly IRecommendationService _service;
+
+        public RecommendationController(IRecommendationService service)
         {
+            _service = service;
         }
 
         public ActionResult Index()
@@ -44,8 +47,8 @@ namespace Musher.Web.Controllers
                 EndYear = model.EndYearQuery
             };
 
-            model.Artists = Service.GetArtists(args);
-            model.Songs = Service.GetSongs(args);
+            model.Artists = _service.GetArtists(args);
+            model.Songs = _service.GetSongs(args);
             model.IsSearch = true;
 
             return View(model);
@@ -53,9 +56,9 @@ namespace Musher.Web.Controllers
 
         private void Populate(RecommendationViewModel model)
         {
-            model.Genres = Service.GetGenres();
-            model.Moods = Service.GetMoods();
-            model.Styles = Service.GetStyles();
+            model.Genres = _service.GetAllGenres();
+            model.Moods = _service.GetAllMoods();
+            model.Styles = _service.GetAllStyles();
         }
     }
 }

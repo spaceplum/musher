@@ -75,7 +75,13 @@
     <Compile Include="Responses\SimilarGenresResponse.cs" />
     <Compile Include="Responses\SongSearchResponse.cs" />
     <Compile Include="Extensions\RestRequestExtensions.cs" />
+    <Compile Include="Services\ArtistService.cs" />
+    <Compile Include="Services\GenreService.cs" />
+    <Compile Include="Services\IArtistService.cs" />
+    <Compile Include="Services\IGenreService.cs" />
+    <Compile Include="Services\IRecommendationService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\RecommendationService.cs" />
     <Compile Include="Services\Service.cs" />
   </ItemGroup>
   <ItemGroup>

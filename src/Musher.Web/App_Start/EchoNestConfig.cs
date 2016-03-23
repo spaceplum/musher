@@ -15,7 +15,9 @@ namespace Musher.Web
             string apiKey = ConfigurationManager.AppSettings["EchoNestApiKey"];
             var container = new Container();
             container.Register<IDataProvider>(() => new DataProvider(apiUrl, apiKey));
-            container.Register<IService, Service>();
+            container.Register<IArtistService, ArtistService>();
+            container.Register<IGenreService, GenreService>();
+            container.Register<IRecommendationService, RecommendationService>();
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }

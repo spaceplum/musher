@@ -11,12 +11,10 @@ namespace Musher.Tests
     [TestClass]
     public class Tests
     {
-        IService _service;
+        IDataProvider _dataProvider = new DataProvider(ConfigurationManager.AppSettings["EchoNestApiUrl"], ConfigurationManager.AppSettings["EchoNestApiKey"]);
 
         public Tests()
         {
-            IDataProvider dataProvider = new DataProvider(ConfigurationManager.AppSettings["EchoNestApiUrl"], ConfigurationManager.AppSettings["EchoNestApiKey"]);
-            _service = new Service(dataProvider);
         }
 
         [TestMethod]
@@ -27,8 +25,9 @@ namespace Musher.Tests
                 Mood = new List<string>() { "angry" }
             };
 
-            var artists = _service.GetArtists(args);
-            var songs = _service.GetSongs(args);
+            var service = new RecommendationService(_dataProvider);
+            var artists = service.GetArtists(args);
+            var songs = service.GetSongs(args);
 
             Assert.IsNotNull(artists);
             Assert.IsNotNull(songs);
@@ -37,14 +36,16 @@ namespace Musher.Tests
         [TestMethod]
         public void GetArtistTest()
         {
-            var response = _service.GetSimilarArtists("mogwai");
+            var service = new ArtistService(_dataProvider);
+            var response = service.GetSimilarArtists("mogwai");
             Assert.IsNotNull(response);
         }
 
         [TestMethod]
         public void GetArtistProfileTest()
         {
-            var response = _service.GetArtistProfile("AR6XZ861187FB4CECD");
+            var service = new ArtistService(_dataProvider);
+            var response = service.GetArtistProfile("AR6XZ861187FB4CECD");
 
             Assert.IsNotNull(response);
         }

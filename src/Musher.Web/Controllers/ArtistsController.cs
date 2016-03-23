@@ -4,10 +4,13 @@ using Musher.Web.Models;
 
 namespace Musher.Web.Controllers
 {
-    public class ArtistsController : ServiceController
+    public class ArtistsController : Controller
     {
-        public ArtistsController(IService service) : base(service)
+        private readonly IArtistService _service;
+
+        public ArtistsController(IArtistService service)
         {
+            _service = service;
         }
 
         public ActionResult Index()
@@ -22,7 +25,7 @@ namespace Musher.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var artist = Service.GetArtistProfile(id);
+            var artist = _service.GetArtistProfile(id);
             var model = new ArtistsArtistViewModel
             {
                 Artist = artist,
@@ -38,7 +41,7 @@ namespace Musher.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var artists = Service.GetSimilarArtists(id);
+            var artists = _service.GetSimilarArtists(id);
             var model = new SimilarArtistsViewModel
             {
                 Artist = id,
@@ -55,12 +58,12 @@ namespace Musher.Web.Controllers
                 return View(model);
             }
 
-            var genres = Service.GetGenres();
+            var genres = _service.GetAllGenres();
             model.Genres = genres;
 
             if (!string.IsNullOrEmpty(model.Name) || !string.IsNullOrEmpty(model.Genre))
             {
-                var artists = Service.GetArtists(model.Name, model.Genre);
+                var artists = _service.GetArtists(model.Name, model.Genre);
                 model.Artists = artists;
                 model.IsSearch = true;
             }
@@ -75,7 +78,7 @@ namespace Musher.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var genres = Service.GetGenres(id);
+            var genres = _service.GetGenres(id);
             var model = new ArtistsGenresViewModel
             {
                 Artist = id,
